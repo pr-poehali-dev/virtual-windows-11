@@ -13,11 +13,13 @@ interface SettingsProps {
   isMaximized: boolean;
   theme: 'light' | 'dark';
   onToggleTheme: () => void;
+  accentColor: string;
+  onChangeAccentColor: (color: string) => void;
 }
 
 type SettingsSection = 'personalization' | 'system' | 'network' | 'bluetooth' | 'privacy';
 
-const Settings = ({ onClose, onMinimize, onMaximize, isMaximized, theme, onToggleTheme }: SettingsProps) => {
+const Settings = ({ onClose, onMinimize, onMaximize, isMaximized, theme, onToggleTheme, accentColor, onChangeAccentColor }: SettingsProps) => {
   const [activeSection, setActiveSection] = useState<SettingsSection>('personalization');
 
   const settingsItems = [
@@ -81,13 +83,32 @@ const Settings = ({ onClose, onMinimize, onMaximize, isMaximized, theme, onToggl
               </div>
 
               <div className="bg-card rounded-xl border border-border p-6">
-                <h2 className="text-lg font-semibold mb-4">Цвет фона</h2>
+                <h2 className="text-lg font-semibold mb-4">Цвет темы</h2>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Выберите основной цвет интерфейса
+                </p>
                 <div className="grid grid-cols-6 gap-3">
-                  {['bg-blue-500', 'bg-purple-500', 'bg-pink-500', 'bg-red-500', 'bg-orange-500', 'bg-green-500'].map((color, i) => (
+                  {[
+                    { color: '#0078D4', name: 'Синий' },
+                    { color: '#8B5CF6', name: 'Фиолетовый' },
+                    { color: '#EC4899', name: 'Розовый' },
+                    { color: '#EF4444', name: 'Красный' },
+                    { color: '#F97316', name: 'Оранжевый' },
+                    { color: '#10B981', name: 'Зелёный' },
+                  ].map((item, i) => (
                     <button
                       key={i}
-                      className={`w-12 h-12 ${color} rounded-lg hover:scale-110 transition-transform`}
-                    />
+                      onClick={() => onChangeAccentColor(item.color)}
+                      style={{ backgroundColor: item.color }}
+                      className={`w-12 h-12 rounded-lg hover:scale-110 transition-transform relative ${
+                        accentColor === item.color ? 'ring-2 ring-offset-2 ring-primary' : ''
+                      }`}
+                      title={item.name}
+                    >
+                      {accentColor === item.color && (
+                        <Icon name="Check" size={20} className="text-white absolute inset-0 m-auto" />
+                      )}
+                    </button>
                   ))}
                 </div>
               </div>

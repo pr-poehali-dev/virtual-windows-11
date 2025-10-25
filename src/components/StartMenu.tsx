@@ -13,6 +13,7 @@ const StartMenu = ({ onOpenApp, onClose }: StartMenuProps) => {
     { type: 'explorer' as AppType, title: 'Проводник', icon: 'Folder', color: 'bg-yellow-500' },
     { type: 'browser' as AppType, title: 'Браузер', icon: 'Globe', color: 'bg-blue-500' },
     { type: 'notepad' as AppType, title: 'Блокнот', icon: 'FileText', color: 'bg-orange-500' },
+    { type: 'calculator' as AppType, title: 'Калькулятор', icon: 'Calculator', color: 'bg-green-500' },
     { type: 'settings' as AppType, title: 'Параметры', icon: 'Settings', color: 'bg-gray-500' },
   ];
 

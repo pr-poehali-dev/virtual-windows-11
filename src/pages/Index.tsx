@@ -6,10 +6,11 @@ import Browser from '@/components/apps/Browser';
 import Notepad from '@/components/apps/Notepad';
 import Settings from '@/components/apps/Settings';
 import FileExplorer from '@/components/apps/FileExplorer';
+import Calculator from '@/components/apps/Calculator';
 import VolumeControl from '@/components/apps/VolumeControl';
 import NetworkControl from '@/components/apps/NetworkControl';
 
-export type AppType = 'browser' | 'notepad' | 'settings' | 'explorer' | null;
+export type AppType = 'browser' | 'notepad' | 'settings' | 'explorer' | 'calculator' | null;
 
 export interface WindowState {
   id: string;
@@ -22,6 +23,7 @@ export interface WindowState {
 
 const Index = () => {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [accentColor, setAccentColor] = useState('#0078D4');
   const [showStartMenu, setShowStartMenu] = useState(false);
   const [showVolumeControl, setShowVolumeControl] = useState(false);
   const [showNetworkControl, setShowNetworkControl] = useState(false);
@@ -135,10 +137,20 @@ const Index = () => {
                 isMaximized={window.isMaximized}
                 theme={theme}
                 onToggleTheme={toggleTheme}
+                accentColor={accentColor}
+                onChangeAccentColor={setAccentColor}
               />
             )}
             {window.type === 'explorer' && (
               <FileExplorer 
+                onClose={() => closeWindow(window.id)}
+                onMinimize={() => minimizeWindow(window.id)}
+                onMaximize={() => maximizeWindow(window.id)}
+                isMaximized={window.isMaximized}
+              />
+            )}
+            {window.type === 'calculator' && (
+              <Calculator 
                 onClose={() => closeWindow(window.id)}
                 onMinimize={() => minimizeWindow(window.id)}
                 onMaximize={() => maximizeWindow(window.id)}

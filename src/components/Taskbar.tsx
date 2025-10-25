@@ -18,6 +18,7 @@ const Taskbar = ({ onToggleStart, windows, onRestoreWindow, onToggleVolume, onTo
       case 'notepad': return 'FileText';
       case 'settings': return 'Settings';
       case 'explorer': return 'Folder';
+      case 'calculator': return 'Calculator';
       default: return 'Square';
     }
   };
