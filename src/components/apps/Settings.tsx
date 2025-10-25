@@ -24,7 +24,7 @@ const Settings = ({ onClose, onMinimize, onMaximize, isMaximized, theme, onToggl
     { id: 'network' as SettingsSection, icon: 'Wifi', title: 'Сеть и Интернет', desc: 'Wi-Fi, режим в самолёте, VPN' },
     { id: 'bluetooth' as SettingsSection, icon: 'Bluetooth', title: 'Bluetooth и устройства', desc: 'Принтеры, мышь, клавиатура' },
     { id: 'personalization' as SettingsSection, icon: 'Palette', title: 'Персонализация', desc: 'Фон, темы, цвета' },
-    { id: 'privacy' as SettingsSection, icon: 'Lock', title: 'Конфиденциальность и защита', desc: 'Разрешения приложений' },
+    { id: 'privacy' as SettingsSection, icon: 'Lock', title: 'Конфиденциальность', desc: 'Разрешения приложений' },
     { id: 'system' as SettingsSection, icon: 'Monitor', title: 'Система', desc: 'Дисплей, звук, уведомления' },
   ];
 
@@ -47,7 +47,7 @@ const Settings = ({ onClose, onMinimize, onMaximize, isMaximized, theme, onToggl
 
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <button
-                    onClick={() => theme === 'dark' && onToggleTheme()}
+                    onClick={onToggleTheme}
                     className={`p-4 rounded-xl border-2 transition-all ${
                       theme === 'light' 
                         ? 'border-primary bg-primary/5' 
@@ -59,7 +59,7 @@ const Settings = ({ onClose, onMinimize, onMaximize, isMaximized, theme, onToggl
                   </button>
 
                   <button
-                    onClick={() => theme === 'light' && onToggleTheme()}
+                    onClick={onToggleTheme}
                     className={`p-4 rounded-xl border-2 transition-all ${
                       theme === 'dark' 
                         ? 'border-primary bg-primary/5' 
@@ -211,7 +211,7 @@ const Settings = ({ onClose, onMinimize, onMaximize, isMaximized, theme, onToggl
       case 'privacy':
         return (
           <div className="max-w-2xl">
-            <h1 className="text-3xl font-semibold mb-2">Конфиденциальность и защита</h1>
+            <h1 className="text-3xl font-semibold mb-2">Конфиденциальность</h1>
             <p className="text-sm text-muted-foreground mb-8">
               Управление разрешениями и защита данных
             </p>

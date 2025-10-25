@@ -21,14 +21,39 @@ interface FileItem {
 const FileExplorer = ({ onClose, onMinimize, onMaximize, isMaximized }: FileExplorerProps) => {
   const [currentPath, setCurrentPath] = useState('Этот компьютер');
   
-  const items: FileItem[] = [
-    { name: 'Документы', type: 'folder', icon: 'FileText', dateModified: '25.10.2025' },
-    { name: 'Загрузки', type: 'folder', icon: 'Download', dateModified: '25.10.2025' },
-    { name: 'Изображения', type: 'folder', icon: 'Image', dateModified: '25.10.2025' },
-    { name: 'Музыка', type: 'folder', icon: 'Music', dateModified: '25.10.2025' },
-    { name: 'Видео', type: 'folder', icon: 'Video', dateModified: '25.10.2025' },
-    { name: 'Рабочий стол', type: 'folder', icon: 'Monitor', dateModified: '25.10.2025' },
-  ];
+  const folderContents: Record<string, FileItem[]> = {
+    'Этот компьютер': [
+      { name: 'Документы', type: 'folder', icon: 'FileText', dateModified: '25.10.2025' },
+      { name: 'Загрузки', type: 'folder', icon: 'Download', dateModified: '25.10.2025' },
+      { name: 'Изображения', type: 'folder', icon: 'Image', dateModified: '25.10.2025' },
+      { name: 'Музыка', type: 'folder', icon: 'Music', dateModified: '25.10.2025' },
+      { name: 'Видео', type: 'folder', icon: 'Video', dateModified: '25.10.2025' },
+      { name: 'Рабочий стол', type: 'folder', icon: 'Monitor', dateModified: '25.10.2025' },
+    ],
+    'Документы': [
+      { name: 'Мои документы', type: 'folder', icon: 'FolderOpen', dateModified: '24.10.2025' },
+      { name: 'Проекты', type: 'folder', icon: 'FolderOpen', dateModified: '23.10.2025' },
+      { name: 'README.txt', type: 'file', icon: 'FileText', dateModified: '20.10.2025' },
+      { name: 'Заметки.txt', type: 'file', icon: 'FileText', dateModified: '19.10.2025' },
+    ],
+    'Загрузки': [
+      { name: 'image.png', type: 'file', icon: 'Image', dateModified: '25.10.2025' },
+      { name: 'document.pdf', type: 'file', icon: 'FileText', dateModified: '24.10.2025' },
+    ],
+    'Изображения': [
+      { name: 'Фото 2025', type: 'folder', icon: 'FolderOpen', dateModified: '20.10.2025' },
+      { name: 'wallpaper.jpg', type: 'file', icon: 'Image', dateModified: '15.10.2025' },
+    ],
+    'Музыка': [
+      { name: 'Playlist.m3u', type: 'file', icon: 'Music', dateModified: '10.10.2025' },
+    ],
+    'Видео': [
+      { name: 'video.mp4', type: 'file', icon: 'Video', dateModified: '05.10.2025' },
+    ],
+    'Рабочий стол': [],
+  };
+
+  const items = folderContents[currentPath] || [];
 
   const sidebarItems = [
     { name: 'Рабочий стол', icon: 'Monitor' },
@@ -94,10 +119,16 @@ const FileExplorer = ({ onClose, onMinimize, onMaximize, isMaximized }: FileExpl
           <div className="flex-1 overflow-auto">
             <div className="p-4">
               <div className="grid grid-cols-1 gap-1">
-                {items.map((item, index) => (
+                {items.length === 0 ? (
+                  <div className="text-center text-muted-foreground py-12">
+                    Папка пуста
+                  </div>
+                ) : (
+                  items.map((item, index) => (
                   <div
                     key={index}
                     className="flex items-center gap-3 p-2 rounded-md hover:bg-accent/50 cursor-pointer group"
+                    onDoubleClick={() => item.type === 'folder' && setCurrentPath(item.name)}
                   >
                     <Icon 
                       name={item.icon} 
@@ -114,7 +145,8 @@ const FileExplorer = ({ onClose, onMinimize, onMaximize, isMaximized }: FileExpl
                       {item.type === 'folder' ? 'Папка' : 'Файл'}
                     </div>
                   </div>
-                ))}
+                  ))
+                )}
               </div>
             </div>
           </div>
