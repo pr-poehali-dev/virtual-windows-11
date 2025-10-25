@@ -81,13 +81,16 @@ const Browser = ({ onClose, onMinimize, onMaximize, isMaximized }: BrowserProps)
           </Button>
         </div>
 
-        <div className="flex-1 bg-white">
+        <div className="flex-1 bg-white relative">
           <iframe
             src={url}
             className="w-full h-full border-0"
-            sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+            sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation allow-top-navigation-by-user-activation"
             title="Browser Content"
           />
+          <div className="absolute top-2 right-2 bg-destructive/80 text-destructive-foreground text-xs px-2 py-1 rounded pointer-events-none">
+            Некоторые сайты могут блокировать iframe
+          </div>
         </div>
       </div>
     </WindowFrame>

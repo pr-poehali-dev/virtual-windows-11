@@ -90,7 +90,9 @@ const Index = () => {
   };
 
   return (
-    <div className={theme}>
+    <div className={theme} style={{ 
+      backgroundImage: accentColor !== '#0078D4' ? `linear-gradient(135deg, ${accentColor}15 0%, ${accentColor}05 100%)` : 'none'
+    }}>
       <div className="h-screen w-screen overflow-hidden bg-background flex flex-col">
         <Desktop 
           windows={windows}

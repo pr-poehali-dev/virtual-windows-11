@@ -159,10 +159,10 @@ const Settings = ({ onClose, onMinimize, onMaximize, isMaximized, theme, onToggl
                     <span className="text-sm">Локальное хранилище браузера</span>
                     <span className="text-sm text-muted-foreground">Доступно</span>
                   </div>
-                  <div className="w-full h-2 bg-accent rounded-full overflow-hidden">
-                    <div className="h-full w-1/3 bg-primary rounded-full" />
+                  <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
+                    <div className="h-full w-0 bg-muted rounded-full" />
                   </div>
-                  <div className="text-xs text-muted-foreground">Использовано ~33% от доступного объёма</div>
+                  <div className="text-xs text-muted-foreground">Свободно ? из ?</div>
                 </div>
               </div>
             </div>
