@@ -7,14 +7,17 @@ interface TaskbarProps {
   windows: WindowState[];
   onRestoreWindow: (id: string) => void;
   theme: 'light' | 'dark';
+  onToggleVolume: () => void;
+  onToggleNetwork: () => void;
 }
 
-const Taskbar = ({ onToggleStart, windows, onRestoreWindow }: TaskbarProps) => {
+const Taskbar = ({ onToggleStart, windows, onRestoreWindow, onToggleVolume, onToggleNetwork }: TaskbarProps) => {
   const getAppIcon = (type: string) => {
     switch(type) {
       case 'browser': return 'Globe';
       case 'notepad': return 'FileText';
       case 'settings': return 'Settings';
+      case 'explorer': return 'Folder';
       default: return 'Square';
     }
   };
@@ -49,8 +52,22 @@ const Taskbar = ({ onToggleStart, windows, onRestoreWindow }: TaskbarProps) => {
       </div>
 
       <div className="ml-auto flex items-center gap-2 px-3">
-        <Icon name="Wifi" size={16} className="text-foreground" />
-        <Icon name="Volume2" size={16} className="text-foreground" />
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="h-8 w-8"
+          onClick={onToggleNetwork}
+        >
+          <Icon name="Wifi" size={16} className="text-foreground" />
+        </Button>
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="h-8 w-8"
+          onClick={onToggleVolume}
+        >
+          <Icon name="Volume2" size={16} className="text-foreground" />
+        </Button>
         <Icon name="Battery" size={16} className="text-foreground" />
         <div className="text-xs text-foreground ml-2">
           {new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}

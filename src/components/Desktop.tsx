@@ -13,13 +13,14 @@ interface DesktopProps {
 
 const Desktop = ({ onOpenApp }: DesktopProps) => {
   const desktopApps = [
-    { type: 'browser' as AppType, title: 'Microsoft Edge', icon: 'Globe' },
+    { type: 'explorer' as AppType, title: 'Проводник', icon: 'Folder' },
+    { type: 'browser' as AppType, title: 'Браузер', icon: 'Globe' },
     { type: 'notepad' as AppType, title: 'Блокнот', icon: 'FileText' },
     { type: 'settings' as AppType, title: 'Параметры', icon: 'Settings' },
   ];
 
   return (
-    <div className="flex-1 p-4 grid grid-cols-[repeat(auto-fill,100px)] gap-4 content-start">
+    <div className="flex-1 p-4 grid grid-cols-1 auto-rows-min gap-3" style={{ gridTemplateColumns: 'repeat(auto-fill, 100px)', gridAutoFlow: 'column' }}>
       {desktopApps.map((app, index) => (
         <button
           key={index}

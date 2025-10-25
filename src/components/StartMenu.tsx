@@ -10,8 +10,9 @@ interface StartMenuProps {
 
 const StartMenu = ({ onOpenApp, onClose }: StartMenuProps) => {
   const apps = [
-    { type: 'browser' as AppType, title: 'Microsoft Edge', icon: 'Globe', color: 'bg-blue-500' },
-    { type: 'notepad' as AppType, title: 'Блокнот', icon: 'FileText', color: 'bg-yellow-500' },
+    { type: 'explorer' as AppType, title: 'Проводник', icon: 'Folder', color: 'bg-yellow-500' },
+    { type: 'browser' as AppType, title: 'Браузер', icon: 'Globe', color: 'bg-blue-500' },
+    { type: 'notepad' as AppType, title: 'Блокнот', icon: 'FileText', color: 'bg-orange-500' },
     { type: 'settings' as AppType, title: 'Параметры', icon: 'Settings', color: 'bg-gray-500' },
   ];
 

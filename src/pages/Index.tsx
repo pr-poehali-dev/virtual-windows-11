@@ -5,8 +5,11 @@ import StartMenu from '@/components/StartMenu';
 import Browser from '@/components/apps/Browser';
 import Notepad from '@/components/apps/Notepad';
 import Settings from '@/components/apps/Settings';
+import FileExplorer from '@/components/apps/FileExplorer';
+import VolumeControl from '@/components/apps/VolumeControl';
+import NetworkControl from '@/components/apps/NetworkControl';
 
-export type AppType = 'browser' | 'notepad' | 'settings' | null;
+export type AppType = 'browser' | 'notepad' | 'settings' | 'explorer' | null;
 
 export interface WindowState {
   id: string;
@@ -20,6 +23,8 @@ export interface WindowState {
 const Index = () => {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [showStartMenu, setShowStartMenu] = useState(false);
+  const [showVolumeControl, setShowVolumeControl] = useState(false);
+  const [showNetworkControl, setShowNetworkControl] = useState(false);
   const [windows, setWindows] = useState<WindowState[]>([]);
   const [nextZIndex, setNextZIndex] = useState(10);
 
@@ -132,6 +137,14 @@ const Index = () => {
                 onToggleTheme={toggleTheme}
               />
             )}
+            {window.type === 'explorer' && (
+              <FileExplorer 
+                onClose={() => closeWindow(window.id)}
+                onMinimize={() => minimizeWindow(window.id)}
+                onMaximize={() => maximizeWindow(window.id)}
+                isMaximized={window.isMaximized}
+              />
+            )}
           </div>
         ))}
 
@@ -140,6 +153,14 @@ const Index = () => {
           windows={windows}
           onRestoreWindow={restoreWindow}
           theme={theme}
+          onToggleVolume={() => {
+            setShowVolumeControl(!showVolumeControl);
+            setShowNetworkControl(false);
+          }}
+          onToggleNetwork={() => {
+            setShowNetworkControl(!showNetworkControl);
+            setShowVolumeControl(false);
+          }}
         />
 
         {showStartMenu && (
@@ -147,6 +168,14 @@ const Index = () => {
             onOpenApp={openApp}
             onClose={() => setShowStartMenu(false)}
           />
+        )}
+
+        {showVolumeControl && (
+          <VolumeControl onClose={() => setShowVolumeControl(false)} />
+        )}
+
+        {showNetworkControl && (
+          <NetworkControl onClose={() => setShowNetworkControl(false)} />
         )}
       </div>
     </div>

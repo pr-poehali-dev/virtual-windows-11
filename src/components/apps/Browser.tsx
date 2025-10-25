@@ -12,8 +12,8 @@ interface BrowserProps {
 }
 
 const Browser = ({ onClose, onMinimize, onMaximize, isMaximized }: BrowserProps) => {
-  const [url, setUrl] = useState('https://www.google.com/webhp?igu=1');
-  const [inputUrl, setInputUrl] = useState('google.com');
+  const [url, setUrl] = useState('https://www.bing.com');
+  const [inputUrl, setInputUrl] = useState('bing.com');
 
   const handleNavigate = () => {
     let newUrl = inputUrl;
@@ -21,7 +21,7 @@ const Browser = ({ onClose, onMinimize, onMaximize, isMaximized }: BrowserProps)
       if (newUrl.includes('.')) {
         newUrl = 'https://' + newUrl;
       } else {
-        newUrl = `https://www.google.com/search?igu=1&q=${encodeURIComponent(newUrl)}`;
+        newUrl = `https://www.bing.com/search?q=${encodeURIComponent(newUrl)}`;
       }
     }
     setUrl(newUrl);
